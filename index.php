@@ -58,27 +58,12 @@ apellido1_apellido2_nombre_SIGxx_Tarea
             $nombre = $_POST['nombre'];
             $telefono = $_POST['telefono'];
 
-                // si no coincide alguno de los datos 
-                if(Agenda::VerificarClave($nombre)){ //coincide la clave 
-                 
-                   if(1==1){ // si hay campo de telefono
-                  // modificamos el telefono
-                         $agenda->modificarTelefono($nombre , $telefono);
-                   }elseif(2==1){ // Si campo de telefono esta bacio
-                          $agenda->eliminarContacto($nombre);     
-                  }else{echo "error 1";}
-                
-                }else{
-                    if (4==4){ // si hay campo telefono
-                        // creamos un contacto
-                      $agenda->rellenarArray($nombre , $telefono);  
-                    }else { echo "error , introduzca los datos correctamente"; }
-                }
-            
+            $agenda->tratamientoDatos($nombre , $telefono);
             $agenda-> mostrarAgenda();
+            $agenda->mostrarMensages();
         }else{
             
-        }
+        
 // -->
          ?>
       </div>
@@ -86,10 +71,18 @@ apellido1_apellido2_nombre_SIGxx_Tarea
             <form action=" <?php echo htmlspecialchars( $_SERVER['PHP_SELF'])?> "
               method="post" name="agenda">
              Cuestionario </br> 
-             Nombre   :  <input type="text" name="nombre"/></br>
-             Telefono : <input type="text" name="telefono"/></br>
+              <!-- campo Nombre permite :  con 4 - 12 digitos de texto (mayusculas minusculas entre a-z) o el campo en blanco --->
+             Nombre   :  <input type="text" name="nombre" minlength="4" maxlength="12" pattern="[A-Za-z]*"/></br>
+             <!-- campo telefono  permite :  9 digitos numericos  del 0-9 o el campo en blanco --->
+             Telefono : <input type="number" name="telefono" min ="100000000 " max=" 999999999" pattern="[0-9]*"/> </br>
               <input type="submit" value="Enviar" name="enviar" />
         </div>  
+        
+        <?php
+        
+        }
+        
+         ?>
         
     </body>
 </html>
