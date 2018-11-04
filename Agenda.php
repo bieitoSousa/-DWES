@@ -81,7 +81,7 @@ class Agenda {
                         echo "Agenda sin contactos" ;
                      }
                 }
-               public static function VerificarClave ($nombre) {
+               public static function verificarClave ($nombre) {
                    if (array_key_exists($nombre, $this->array_asociativo)) {
                         return true;
                     } else {
@@ -89,7 +89,7 @@ class Agenda {
                     }
                 }
                 
-                public static function VerificarValor ($telefono) {
+                public static function verificarValor ($telefono) {
                   $clave = array_search($telefono, $this->array_asociativo); // quitamos la clave apartir del valor , devuelve null si no encuentra
                   if ($clave != null){ 
                       return true;
@@ -98,18 +98,18 @@ class Agenda {
                     }
                 } 
                 
-               public static function VerficarDatos($nombre ,$telefono) { // quitamos la clave apartir del valor, y vemos si coinciden.
+               public static function verficarDatos($nombre ,$telefono) { // quitamos la clave apartir del valor, y vemos si coinciden.
                   $clave = array_search($telefono, $this->array_asociativo); 
                   if ($clave == $nombre) {
                       return true;
                   } else {return false;}
                }
 
-               public function EliminarContacto($nombre ) {
+               public function eliminarContacto($nombre ) {
                    unset($this->array_asociativo[$nombre]);//elimino del array asociativo que tiene la [clave] 
                }
                
-               public function ModificarTelefono($nombre ,$telefono) {
+               public function modificarTelefono($nombre ,$telefono) {
                    $remplazos=array();
                    $base = array(); 
                       $base[]= $this->array_asociativo;

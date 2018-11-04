@@ -53,27 +53,27 @@ apellido1_apellido2_nombre_SIGxx_Tarea
           // <!-- 
           include 'Agenda.php';
          // $array_asociativo["Nombre"]="Telefono";
-        if (isset($_POST['enviar'])) {
+        if (isset($_POST['enviar'])) { // si se presiona el boton enviar 
             $agenda = Agenda::getAgenda();
             $nombre = $_POST['nombre'];
             $telefono = $_POST['telefono'];
-            if (Agenda::VerficarDatos($nombre, $telefono)){
-                // si los dos datos coinciden 
-            }else{
+
                 // si no coincide alguno de los datos 
-                if(Agenda::VerificarClave($nombre)){
-                  //coincide la clave  
+                if(Agenda::VerificarClave($nombre)){ //coincide la clave 
+                 
+                   if(1==1){ // si hay campo de telefono
+                  // modificamos el telefono
+                         $agenda->modificarTelefono($nombre , $telefono);
+                   }elseif(2==1){ // Si campo de telefono esta bacio
+                          $agenda->eliminarContacto($nombre);     
+                  }else{echo "error 1";}
+                
+                }else{
+                    if (4==4){ // si hay campo telefono
+                        // creamos un contacto
+                      $agenda->rellenarArray($nombre , $telefono);  
+                    }else { echo "error , introduzca los datos correctamente"; }
                 }
-                elseif (Agenda::VerificarValor($telefono)){
-                    //coincide el valor 
-                }
-                else {
-                   // no coincide nada 
-                      $agenda->rellenarArray($nombre, $telefono);
-                    }
-            }
-            
-           
             
             $agenda-> mostrarAgenda();
         }else{
